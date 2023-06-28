@@ -1,0 +1,7 @@
+venv
+.env
+__pycache__
+volumes/*
+airflow-etl/logs
+airflow-etl/config
+airflow-etl/plugins
