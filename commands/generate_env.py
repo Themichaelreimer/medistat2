@@ -16,7 +16,7 @@ def run() -> None:
     write_env_file(env_vars)
 
 
-def generate_random_string(length: int, allow_symbols=False):
+def generate_random_string(length: int, allow_symbols: bool = False) -> str:
     """
     Generates a random string of the given length
     Used for generating random passwords that get passed to docker containers
@@ -35,7 +35,7 @@ def write_env_file(env_vars: dict) -> None:
             file.write(f'{key}="{env_vars[key]}"\n')
 
 
-def generate_env_vars():
+def generate_env_vars() -> dict[str, object]:
     result = {
         "HOST_NAME": "localhost",
         "BASE_DIR": os.getcwd(),  # Helps docker_compose out
