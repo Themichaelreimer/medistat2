@@ -22,7 +22,7 @@ with DAG(
 ) as test_dag:
 
     @task
-    def run():
+    def run() -> None:
         print("Hello world")
 
     run()

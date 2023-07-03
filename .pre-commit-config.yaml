@@ -28,6 +28,8 @@ repos:
     -   id: mypy
         name: Python type checking (mypy)
         args: [--no-strict-optional, --ignore-missing-imports, --config-file=./mypy.ini]
+        additional_dependencies:
+          - types-PyYAML
 -   repo: https://github.com/Lucas-C/pre-commit-hooks
     rev: 'v1.5.1'
     hooks:
