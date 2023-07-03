@@ -72,7 +72,9 @@ def get_docker_compose_version() -> str:
     raise Exception(f"Could not parse output of {''.join(command_tokens)}: {version_output}")
 
 
-def get_docker_containers_by_name(name: str, filter_by_project_name: bool = True) -> List[Container]:
+def get_docker_containers_by_name(
+    name: str, filter_by_project_name: bool = True
+) -> List[Container]:
     """
     Returns the containers that contain `name` as a substring.
     :param name: All containers returned will have `name` as a substring

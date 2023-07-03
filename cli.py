@@ -3,7 +3,9 @@ try:
     import dotenv
     import importlib
 except ModuleNotFoundError:
-    print("Could not find required package for CLI. Try running `pip3 install -r commands/requirements.txt`.")
+    print(
+        "Could not find required package for CLI. Try running `pip3 install -r commands/requirements.txt`."
+    )
 
 if __name__ == "__main__":
     dotenv.load_dotenv()
@@ -17,7 +19,9 @@ if __name__ == "__main__":
 
     if command:
         try:
-            sys.argv = sys.argv[1:]  # Effectively removes the manager.py from sys.argv. Makes things easier for argparse
+            sys.argv = sys.argv[
+                1:
+            ]  # Effectively removes the manager.py from sys.argv. Makes things easier for argparse
             module = importlib.import_module(f"commands.{command}")
             module.run()
         except ModuleNotFoundError as e:
