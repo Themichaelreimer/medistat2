@@ -6,7 +6,6 @@ except ModuleNotFoundError:
     print("Could not find required package for CLI. Try running `pip3 install -r commands/requirements.txt`.")
 
 if __name__ == "__main__":
-
     dotenv.load_dotenv()
     command = None
     try:

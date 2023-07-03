@@ -1,7 +1,7 @@
 import os
 import docker
 import subprocess
-import re 
+import re
 
 # For type hinting
 from typing import List, Dict, Union, Iterable, Optional
@@ -27,12 +27,13 @@ def bash(cmd: str) -> int:
     return os.WEXITSTATUS(os.system(f'bash -c "{cmd}"'))
 
 
-def command(command_tokens:List[str]) -> int:
+def command(command_tokens: List[str]) -> int:
     try:
         completed_process = subprocess.run(command_tokens, capture_output=True, check=False)
         return os.WEXITSTATUS(completed_process.returncode)
     except:
         return -1
+
 
 def get_docker_project_name() -> str:
     """
@@ -49,9 +50,9 @@ def detect_docker_compose_command() -> str:
     Throws an error otherwise
     """
 
-    if command(["docker-compose","version"]) == 0:
+    if command(["docker-compose", "version"]) == 0:
         return "docker-compose"
-    if command(["docker","compose","version"]) == 0:
+    if command(["docker", "compose", "version"]) == 0:
         return "docker compose"
     else:
         raise Exception("Could not find docker compose. Are you sure it's installed?")

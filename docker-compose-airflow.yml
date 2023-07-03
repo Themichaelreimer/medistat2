@@ -46,7 +46,7 @@
 
 
 # NOTE:
-# This file originally came from the airflow docs at 
+# This file originally came from the airflow docs at
 # https://airflow.apache.org/docs/apache-airflow/2.6.2/docker-compose.yaml,
 # but IT IS MODIFIED.
 ---
