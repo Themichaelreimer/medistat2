@@ -33,7 +33,16 @@ def airflow_integration_tests() -> int:
     Runs airflow integration tests, returns exit code
     """
     print("Airflow integration tests:")
-    return 0
+
+    matching_containers = get_docker_containers_by_name(
+        "airflow-webserver", filter_by_project_name=True
+    )
+    assert (
+        len(matching_containers) == 1
+    ), f"There should be exactly one airflow-webserver container in this project. Found {len(matching_containers)}"
+    container = matching_containers[0]
+
+    return __run_command_in_container(container, "airflow tasks test airflow_integration_test run")
 
 
 @tag("test", "unit", "commands")
@@ -54,6 +63,7 @@ def __run_command_in_container(container: Container, command: str) -> int:
     :return: exit code
     """
     exit_code, output = container.exec_run(command)
+    print(output.decode())
     return exit_code
 
 
