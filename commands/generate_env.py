@@ -42,5 +42,6 @@ def generate_env_vars() -> dict[str, object]:
         "AIRFLOW_UID": os.getuid(),  # Prevents permission errors with logs, etc
         "REDIS_PASS": generate_random_string(PASSWORD_LENGTH),
         "AIRFLOW_DB_PASS": generate_random_string(PASSWORD_LENGTH),
+        "PROJECT_NAME": "medistat2",
     }
     return result

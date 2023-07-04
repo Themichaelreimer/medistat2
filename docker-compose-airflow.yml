@@ -83,6 +83,7 @@ x-airflow-common:
     - ${BASE_DIR}/airflow-etl/logs:/opt/airflow/logs
     - ${BASE_DIR}/airflow-etl/config:/opt/airflow/config
     - ${BASE_DIR}/airflow-etl/plugins:/opt/airflow/plugins
+    - ${BASE_DIR}/airflow-etl/tests:/opt/airflow/tests
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on

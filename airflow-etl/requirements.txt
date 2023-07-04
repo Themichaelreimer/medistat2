@@ -271,6 +271,7 @@ pyodbc==4.0.39
 pyOpenSSL==23.2.0
 pyparsing==3.0.9
 pyrsistent==0.19.3
+pytest==7.4.0
 python-daemon==3.0.1
 python-dateutil==2.8.2
 python-dotenv==0.21.1
