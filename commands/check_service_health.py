@@ -18,8 +18,10 @@ from .common.docker_helpers import (
 """
 
 EXPECTED_COMPOSE_FILE_NAMES = ["docker-compose.yml"]
-STARTING_MAX_RETRIES = 30  # Retry health check up to this number of times, if the container is still starting
-STARTING_RETRY_LATENCY = 5  # Number of seconds between health checks if a container is still starting
+# Retry health check up to this number of times, if the container is still starting
+STARTING_MAX_RETRIES = 30
+# Number of seconds between health checks if a container is still starting
+STARTING_RETRY_LATENCY = 5
 
 
 def run() -> None:
@@ -34,8 +36,14 @@ def run() -> None:
 
         containers = get_containers_map()
         for service in service_names:
-            expected_container_name = f"{project_name}_{service}_1" if is_docker_compose_v1 else f"{project_name}-{service}-1"
-            assert expected_container_name in containers, f"Container `{expected_container_name}` is not running"
+            expected_container_name = (
+                f"{project_name}_{service}_1"
+                if is_docker_compose_v1
+                else f"{project_name}-{service}-1"
+            )
+            assert (
+                expected_container_name in containers
+            ), f"Container `{expected_container_name}` is not running"
 
             container = containers[expected_container_name]
             check_container_state(container)
@@ -67,7 +75,9 @@ def check_container_state(container: Container) -> None:
     Raises an exception if this is not the case, with a useful error message
     """
     status = container.attrs["State"]["Status"]
-    assert status == "running", f"Container `{container.name}` has status `{status}`. It should be `running`."
+    assert (
+        status == "running"
+    ), f"Container `{container.name}` has status `{status}`. It should be `running`."
 
     # health_state only present if health check is defined, else is None
     for _ in range(STARTING_MAX_RETRIES):
@@ -76,10 +86,14 @@ def check_container_state(container: Container) -> None:
             if health_state == "healthy":
                 return
             elif health_state == "unhealthy":
-                raise Exception(f"Container `{container.name}` has health status of `{health_state}`. It should be `healthy`.")
+                raise Exception(
+                    f"Container `{container.name}` has health status of `{health_state}`. It should be `healthy`."
+                )
             elif health_state == "starting":
                 # Note that this is the only condition that allows the loop to reach the next iteration
-                print(f"Container `{container.name}` is still starting. Waiting {STARTING_RETRY_LATENCY}s")
+                print(
+                    f"Container `{container.name}` is still starting. Waiting {STARTING_RETRY_LATENCY}s"
+                )
                 sleep(STARTING_RETRY_LATENCY)
                 # Need to refresh our container object to get the new object state, else it'll be healthy and we'll never know
                 container = get_containers_map()[container.name]
@@ -88,7 +102,9 @@ def check_container_state(container: Container) -> None:
         else:
             # No health state
             return
-    raise Exception("Max 'starting' retries reached. Consider investigating why the container is starting slowly, or adjust retry parameters.")
+    raise Exception(
+        "Max 'starting' retries reached. Consider investigating why the container is starting slowly, or adjust retry parameters."
+    )
 
 
 def get_container_health_state(container: Container) -> Optional[str]:

@@ -10,4 +10,4 @@ def run() -> None:
     print(f"Available commands: ")
     for file in files:
         # File with out the extension, since the command won't be entered with the extension
-        print("".join(file.split(".")[:-1])) 
+        print("".join(file.split(".")[:-1]))

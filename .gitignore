@@ -5,3 +5,5 @@ volumes/*
 airflow-etl/logs
 airflow-etl/config
 airflow-etl/plugins
+.mypy_cache
+.pytest_cache
